@@ -1,25 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import unittest
+
 from selenium import webdriver
-from BaiduHome import BaiduHome
-from DataPool import DataPool
-from ExceptionBase import *
+from Errors.ExceptionWarpper import *
+from Data.DataPool import DBDataPool
+from Pages.BaiduHome import BaiduHome
 
 class TestDemo(unittest.TestCase):
     @exception_logger
+    @name_logger
     def setUp(self):
-        wd = webdriver.Chrome()
-        wd.get('http://www.baidu.com')
-        self.page = BaiduHome(wd)
-        self.wd = wd
+        self.wd = webdriver.Chrome()
+        self.dp = DBDataPool(self.__class__.__name__)
+        self.wd.get(self.dp.get('BAIDU_HOME_URL'))
+        self.page = BaiduHome(self.wd)
 
     @exception_logger
     @assert_logger
     def test_sample(self):
-        self.page.key_worlds_input(DataPool.get('SELENIUM'))
+        self.page.key_worlds_input(self.dp.get('SELENIUM'))
         self.page.search_click()
-        assert False
+        assert True
 
     @exception_logger
     def tearDown(self):

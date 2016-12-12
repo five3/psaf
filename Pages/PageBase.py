@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from selenium.webdriver.support.select import Select
-from ExceptionBase import *
+from Errors.ExceptionWarpper import *
 
 class PageBase(object):
     def __init__(self, driver, locators):

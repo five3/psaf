@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 from PageBase import PageBase
-from Locator import Locator
+from Locator.Locator import DBLocator
 
 class BaiduHome(PageBase):
     def __init__(self, wd):
-        PageBase.__init__(self, wd, Locator)
+        locator = DBLocator(self.__class__.__name__)
+        PageBase.__init__(self, wd, locator)
 
     def __del__(self):
         pass
