@@ -11,10 +11,12 @@ class DBLocator(object):
         sql = self.__get_sql__()
         self.data = self.select_data(sql)
 
-    def get(self, name):
+    def get(self, name, default=None):
         value = self.data.get(name)
         if value:
             return value
+        elif default:
+            return default
         else:
             raise NOLOCATORERROR(self.module, self.page, name)
 
@@ -36,7 +38,7 @@ class DBLocator(object):
         if data:
             return dict(data)
         else:
-            raise NOLOCATORERROR(self.module, self.page, None)
+            raise NOLOCATORERROR(self.module, self.page)
 
 FileLocator = {
     'KEY_WORLDS' : '#kw',
