@@ -10,17 +10,18 @@ def element_not_found_exception(func):
         try:
             return func(self, locator)
         except NoSuchElementException:
-            result.logError('element not found for locator:'+locator+'At method:'+func.__name__)
+            result.log_error('element not found for locator:'+locator+'At method:'+func.__name__)
             return None
     return not_found
 
 def assert_logger(func):
     def assertlogger(self):
         try:
-            result.logInfo('Test Case is:'+func.__name__)
+            result.log_info('Test Case is:'+func.__name__)
             return func(self)
         except AssertionError, ex:
-            result.logError('AssertError in: %s.%s' % (self.__class__.__name__, func.__name__))
+            result.log_error('AssertError in: %s.%s' % (self.__class__.__name__, func.__name__))
+            result.log_fail()
     assertlogger.__name__=func.__name__
     return assertlogger
 
@@ -29,7 +30,7 @@ def exception_logger(func):
         try:
             return func(self)
         except Exception, ex:
-            result.logError("%s:%s At method:%s" % (Exception, ex.message, func.__name__))
+            result.log_error("%s:%s At method:%s" % (Exception, ex.message, func.__name__))
             # print sys.exc_info()
             if True: ##debug is Ttrue?
                 print traceback.print_exc()  ##打印完整堆栈用于定位代码行
@@ -37,7 +38,7 @@ def exception_logger(func):
 
 def name_logger(func):
     def namelogger(self):
-        result.logInfo('Test Class is:'+self.__class__.__name__)
+        result.log_info('Test Class is:'+self.__class__.__name__)
         return func(self)
     namelogger.__name__=func.__name__
     return namelogger

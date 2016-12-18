@@ -8,7 +8,7 @@ class DBDataPool(object):
         self.test_case = test_case
         self.module = module
 
-    def get(self, name):
+    def get(self, name, defalut=None):
         where = ' AND 1=1 '
         if self.module:
             where += ''' AND module='%s' ''' % self.module
@@ -19,6 +19,8 @@ class DBDataPool(object):
         data = self.select_data(sql)
         if data:
             return data[0]
+        elif defalut is not None:
+            return defalut
         else:
             raise NOTESTDATAERROR(self.module, self.test_case, name)
 

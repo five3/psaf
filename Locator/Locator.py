@@ -15,7 +15,7 @@ class DBLocator(object):
         value = self.data.get(name)
         if value:
             return value
-        elif default:
+        elif default is not None:
             return default
         else:
             raise NOLOCATORERROR(self.module, self.page, name)

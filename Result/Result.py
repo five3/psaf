@@ -31,31 +31,31 @@ class Result(object):
         self.__infor = logging.getLogger("infomation")
 
     @findcaller
-    def logPass(self, caller=''):
+    def log_pass(self, caller=''):
         self.__resulter.critical('PASS::'+caller)
 
     @findcaller
-    def logFail(self, caller=''):
+    def log_fail(self, caller=''):
         self.__resulter.critical('FAIL::'+caller)
 
     @findcaller
-    def logDebug(self, msg, caller=''):
+    def log_debug(self, msg, caller=''):
         self.__infor.debug('[%s] %s' % (caller, msg))
 
     @findcaller
-    def logInfo(self, msg, caller=''):
+    def log_info(self, msg, caller=''):
         self.__infor.info('[%s] %s' % (caller, msg))
 
     @findcaller
-    def logWarning(self, msg, caller=''):
+    def log_warning(self, msg, caller=''):
         self.__infor.warning('[%s] %s' % (caller, msg))
 
     @findcaller
-    def logError(self, msg, caller=''):
+    def log_error(self, msg, caller=''):
         self.__infor.error('[%s] %s' % (caller, msg))
 
     @findcaller
-    def logCritical(self, msg, caller=''):
+    def log_critical(self, msg, caller=''):
         self.__infor.critical('[%s] %s' % (caller, msg))
 
 if __name__=='__main__':

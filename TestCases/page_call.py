@@ -22,8 +22,9 @@ class TestDemo(unittest.TestCase):
     def test_sample(self):
         self.page.key_worlds_input(self.dp.get('SELENIUM'))
         self.page.search_click()
-        self.result.logInfo('The search button is clicked')
+        self.result.log_info('The search button is clicked')
         assert True
+        result.log_pass()
 
     @exception_logger
     def tearDown(self):
