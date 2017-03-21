@@ -6,7 +6,7 @@ from selenium import webdriver
 from Errors.ExceptionWarpper import *
 from Data.DataPool import DBDataPool
 from Pages.BaiduHome import BaiduHome
-from Result.Result import Result
+from Result.DBResult import DBResult
 class TestDemo(unittest.TestCase):
     @exception_logger
     @name_logger
@@ -15,16 +15,16 @@ class TestDemo(unittest.TestCase):
         self.dp = DBDataPool(self.__class__.__name__)
         self.wd.get(self.dp.get('BAIDU_HOME_URL'))
         self.page = BaiduHome(self.wd)
-        self.result = Result()
+        self.result = DBResult()
 
     @exception_logger
     @assert_logger
     def test_sample(self):
         self.page.key_worlds_input(self.dp.get('SELENIUM'))
         self.page.search_click()
-        self.result.log_info('The search button is clicked')
+        self.result.log_info(self,'The search button is clicked')
         assert True
-        self.result.log_pass()
+        self.result.log_pass(self)
 
     @exception_logger
     def tearDown(self):
